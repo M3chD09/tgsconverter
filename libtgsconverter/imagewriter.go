@@ -28,6 +28,8 @@ func newImageWriter(extension string, w uint, h uint, options ConverterOptions) 
 		writer = &toapng{}
 	case "gif":
 		writer = &togif{}
+	case "jpeg", "jpg":
+		writer = &tojpeg{}
 	case "png":
 		writer = &topng{}
 	case "webp":

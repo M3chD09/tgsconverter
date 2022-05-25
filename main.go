@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Println("Usage: tgsconverter path/to/tgs format (apng, gif, png, webp)")
+		fmt.Println("Usage: tgsconverter path/to/tgs format (apng, gif, jpeg, png, webp)")
 		os.Exit(1)
 	}
 	extension := os.Args[2]

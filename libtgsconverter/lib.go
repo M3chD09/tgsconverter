@@ -152,6 +152,8 @@ func SupportsExtension(extension string) bool {
 		fallthrough
 	case "gif":
 		fallthrough
+	case "jpeg", "jpg":
+		fallthrough
 	case "png":
 		fallthrough
 	case "webp":
@@ -159,5 +161,4 @@ func SupportsExtension(extension string) bool {
 	default:
 		return false
 	}
-	return false
 }
