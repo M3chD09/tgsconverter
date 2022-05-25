@@ -1,10 +1,13 @@
 package main
-import "fmt"
-import "io/ioutil"
-import "path/filepath"
-import "os"
 
-import "github.com/Benau/tgsconverter/libtgsconverter"
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+
+	"github.com/Benau/tgsconverter/libtgsconverter"
+)
 
 func main() {
 	if len(os.Args) != 3 {
@@ -25,6 +28,6 @@ func main() {
 		os.Exit(3)
 	}
 	tgs := filepath.Ext(filename)
-	name := filename[0 : len(filename) - len(tgs)]
-	ioutil.WriteFile(name + "." + extension, ret, 0666)
+	name := filename[0 : len(filename)-len(tgs)]
+	ioutil.WriteFile(name+"."+extension, ret, 0666)
 }

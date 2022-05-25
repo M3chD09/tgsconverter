@@ -1,24 +1,26 @@
 package libtgsconverter
 
-import "bytes"
-import "image"
+import (
+	"bytes"
+	"image"
 
-import "github.com/sizeofint/webpanimation"
+	"github.com/sizeofint/webpanimation"
+)
 
 type towebp struct {
 	timestamp int
-	webpanim *webpanimation.WebpAnimation
-	config webpanimation.WebPConfig
+	webpanim  *webpanimation.WebpAnimation
+	config    webpanimation.WebPConfig
 }
 
-func(to_webp *towebp) init(w uint, h uint, options ConverterOptions) {
+func (to_webp *towebp) init(w uint, h uint, options ConverterOptions) {
 	to_webp.timestamp = 0
 	to_webp.webpanim = webpanimation.NewWebpAnimation(int(w), int(h), 0)
 	to_webp.config = webpanimation.NewWebpConfig()
 	to_webp.config.SetQuality(options.GetWebpQuality())
 }
 
-func(to_webp *towebp) SupportsAnimation() bool {
+func (to_webp *towebp) SupportsAnimation() bool {
 	return true
 }
 

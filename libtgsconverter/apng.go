@@ -1,20 +1,23 @@
 package libtgsconverter
 
-import "bytes"
-import "image"
+import (
+	"bytes"
+	"image"
 
-import "github.com/kettek/apng"
-import "github.com/av-elier/go-decimal-to-rational"
+	"github.com/kettek/apng"
+
+	dectofrac "github.com/av-elier/go-decimal-to-rational"
+)
 
 type toapng struct {
-	apng apng.APNG
+	apng       apng.APNG
 	prev_frame *image.RGBA
 }
 
-func(to_apng *toapng) init(w uint, h uint, options ConverterOptions) {
+func (to_apng *toapng) init(w uint, h uint, options ConverterOptions) {
 }
 
-func(to_apng *toapng) SupportsAnimation() bool {
+func (to_apng *toapng) SupportsAnimation() bool {
 	return true
 }
 

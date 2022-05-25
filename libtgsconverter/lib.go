@@ -1,12 +1,14 @@
 package libtgsconverter
 
-import "bytes"
-import "errors"
-import "compress/gzip"
-import "image"
-import "io/ioutil"
+import (
+	"bytes"
+	"compress/gzip"
+	"errors"
+	"image"
+	"io/ioutil"
 
-import "github.com/Benau/go_rlottie"
+	"github.com/Benau/go_rlottie"
+)
 
 type ConverterOptions interface {
 	SetExtension(ext string)
@@ -30,35 +32,35 @@ type converter_options struct {
 	webpQuality float32
 }
 
-func(opt *converter_options) SetExtension(ext string) {
+func (opt *converter_options) SetExtension(ext string) {
 	opt.extension = ext
 }
 
-func(opt *converter_options) SetFPS(fps uint) {
+func (opt *converter_options) SetFPS(fps uint) {
 	opt.fps = fps
 }
 
-func(opt *converter_options) SetScale(scale float32) {
+func (opt *converter_options) SetScale(scale float32) {
 	opt.scale = scale
 }
 
-func(opt *converter_options) SetWebpQuality(webp_quality float32) {
+func (opt *converter_options) SetWebpQuality(webp_quality float32) {
 	opt.webpQuality = webp_quality
 }
 
-func(opt *converter_options) GetExtension() string {
+func (opt *converter_options) GetExtension() string {
 	return opt.extension
 }
 
-func(opt *converter_options) GetFPS() uint {
+func (opt *converter_options) GetFPS() uint {
 	return opt.fps
 }
 
-func(opt *converter_options) GetScale() float32 {
+func (opt *converter_options) GetScale() float32 {
 	return opt.scale
 }
 
-func(opt *converter_options) GetWebpQuality() float32 {
+func (opt *converter_options) GetWebpQuality() float32 {
 	return opt.webpQuality
 }
 
@@ -69,7 +71,7 @@ func NewConverterOptions() ConverterOptions {
 func imageFromBuffer(p []byte, w uint, h uint) *image.RGBA {
 	// rlottie use ARGB32_Premultiplied
 	for i := 0; i < len(p); i += 4 {
-		p[i + 0], p[i + 2] = p[i + 2], p[i + 0]
+		p[i+0], p[i+2] = p[i+2], p[i+0]
 	}
 	m := image.NewRGBA(image.Rect(0, 0, int(w), int(h)))
 	m.Pix = p
@@ -78,6 +80,7 @@ func imageFromBuffer(p []byte, w uint, h uint) *image.RGBA {
 }
 
 var disabled_cache = false
+
 func ImportFromData(data []byte, options ConverterOptions) ([]byte, error) {
 	if !disabled_cache {
 		disabled_cache = true
@@ -119,9 +122,9 @@ func ImportFromData(data []byte, options ConverterOptions) ([]byte, error) {
 
 	var i float32
 	for i = 0.; i < duration; i += step {
-		frame := go_rlottie.LottieAnimationGetFrameAtPos(animation, i / duration)
-		buf := make([]byte, w * h * 4)
-		go_rlottie.LottieAnimationRender(animation, frame, buf, w, h, w * 4)
+		frame := go_rlottie.LottieAnimationGetFrameAtPos(animation, i/duration)
+		buf := make([]byte, w*h*4)
+		go_rlottie.LottieAnimationRender(animation, frame, buf, w, h, w*4)
 		m := imageFromBuffer(buf, w, h)
 		err := writer.AddFrame(m, uint(desired_framerate))
 		if err != nil {
@@ -143,7 +146,7 @@ func ImportFromFile(path string, options ConverterOptions) ([]byte, error) {
 	return ImportFromData(tgs, options)
 }
 
-func SupportsExtension(extension string) (bool) {
+func SupportsExtension(extension string) bool {
 	switch extension {
 	case "apng":
 		fallthrough

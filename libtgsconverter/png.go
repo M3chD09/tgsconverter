@@ -1,17 +1,19 @@
 package libtgsconverter
 
-import "bytes"
-import "image"
-import "image/png"
+import (
+	"bytes"
+	"image"
+	"image/png"
+)
 
 type topng struct {
 	result []byte
 }
 
-func(to_png *topng) init(w uint, h uint, options ConverterOptions) {
+func (to_png *topng) init(w uint, h uint, options ConverterOptions) {
 }
 
-func(to_png *topng) SupportsAnimation() bool {
+func (to_png *topng) SupportsAnimation() bool {
 	return false
 }
 
