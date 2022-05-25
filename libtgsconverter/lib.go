@@ -5,7 +5,8 @@ import (
 	"compress/gzip"
 	"errors"
 	"image"
-	"io/ioutil"
+	"io"
+	"os"
 
 	"github.com/Benau/go_rlottie"
 )
@@ -90,7 +91,7 @@ func ImportFromData(data []byte, options ConverterOptions) ([]byte, error) {
 	if err != nil {
 		return nil, errors.New("Failed to create gzip reader:" + err.Error())
 	}
-	uncompressed, err := ioutil.ReadAll(z)
+	uncompressed, err := io.ReadAll(z)
 	if err != nil {
 		return nil, errors.New("Failed to read gzip archive")
 	}
@@ -139,7 +140,7 @@ func ImportFromData(data []byte, options ConverterOptions) ([]byte, error) {
 }
 
 func ImportFromFile(path string, options ConverterOptions) ([]byte, error) {
-	tgs, err := ioutil.ReadFile(path)
+	tgs, err := os.ReadFile(path)
 	if err != nil {
 		return nil, errors.New("Error when opening file:" + err.Error())
 	}

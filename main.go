@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -29,5 +28,5 @@ func main() {
 	}
 	tgs := filepath.Ext(filename)
 	name := filename[0 : len(filename)-len(tgs)]
-	ioutil.WriteFile(name+"."+extension, ret, 0666)
+	os.WriteFile(name+"."+extension, ret, 0666)
 }
