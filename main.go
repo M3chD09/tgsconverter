@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Benau/tgsconverter/libtgsconverter"
+	"github.com/M3chD09/tgsconverter/libtgsconverter"
 )
 
 func main() {
